@@ -15,11 +15,8 @@ String fourthChar;
         String ciphertext; // variable to hold the completed encrypted text
         digitAssign(plaintext); // breaking up the inputted string into separate variables
 
-        // the actual math that changes the value of the digit
-        this.firstDigit = (this.firstDigit + 7) % 10;
-        this.secondDigit = (this.secondDigit + 7) % 10;
-        this.thirdDigit = (this.thirdDigit + 7) % 10;
-        this.fourthDigit = (this.fourthDigit + 7) % 10;
+
+        shiftApply(); // Calls the function to apply the shift
 
         charAssign(); // turning the digits into a string to be composed
 
@@ -33,6 +30,12 @@ String fourthChar;
         this.secondDigit = plaintext.charAt(1) - 48;
         this.thirdDigit = plaintext.charAt(2) - 48;
         this.fourthDigit = plaintext.charAt(3) - 48;
+    }
+    public void shiftApply(){ // the actual math that changes the value of the digit
+        this.firstDigit = (this.firstDigit + 7) % 10;
+        this.secondDigit = (this.secondDigit + 7) % 10;
+        this.thirdDigit = (this.thirdDigit + 7) % 10;
+        this.fourthDigit = (this.fourthDigit + 7) % 10;
     }
 
     public void charAssign(){ // This function converts the digit value into a string
