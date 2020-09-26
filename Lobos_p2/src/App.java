@@ -37,7 +37,7 @@ public class App {
 
     private static void displayBmiStatistics(ArrayList<BodyMassIndex> bmiData) {
         double summedBMIs = 0;
-        double curBMIval = 0;
+        double curBMIval;
         double avgBMI;
         BodyMassIndex curBMI = new BodyMassIndex(0,0);
 
@@ -48,31 +48,50 @@ public class App {
         }
         avgBMI = summedBMIs / bmiData.size();
 
-        System.out.println(String.format("The average BMI from the entered data is : %.2f", avgBMI ));
+        System.out.printf("The average BMI from the entered data is : %.2f%n", avgBMI );
 
     }
 
     private static void displayBmiInfo(BodyMassIndex bmi) {
         double BMI = bmi.BMI;
         String category = bmi.category;
-        System.out.println(String.format("BMI : %.1f --> %s", BMI, category));
+        System.out.printf("BMI : %.1f --> %s%n", BMI, category);
     }
 
     private static double getUserHeight(){
         Scanner input = new Scanner(System.in);
-        double height;
-        System.out.println("Please enter a Height (in inches)");
-        height = input.nextDouble();
-        input.nextLine();
+        boolean goodVal = false;
+        double height = 0;
+        while (goodVal == false) {
+            System.out.println("Please enter a Height (in inches)");
+            height = input.nextDouble();
+            input.nextLine();
+            if (height < 0){
+                System.out.println("Please enter a positive value");
+                goodVal = false;
+            }
+            else {
+                goodVal = true;
+            }
+        }
         return height;
     }
 
     private static double getUserWeight(){
         Scanner input = new Scanner(System.in);
-        double weight;
-        System.out.println("Please enter a Weight (in pounds)");
-        weight = input.nextDouble();
-        input.nextLine();
+        boolean goodVal = false;
+        double weight = 0;
+        while (goodVal == false) {
+            System.out.println("Please enter a Weight (in pounds)");
+            weight = input.nextDouble();
+            input.nextLine();
+            if (weight < 0){
+                System.out.println("Please enter a positive value");
+                goodVal = false;
+            } else {
+                goodVal = true;
+            }
+        }
         return weight;
     }
 
