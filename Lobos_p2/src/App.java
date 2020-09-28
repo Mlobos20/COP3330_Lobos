@@ -48,7 +48,7 @@ public class App {
         }
         avgBMI = summedBMIs / bmiData.size();
 
-        System.out.printf("The average BMI from the entered data is : %.2f%n", avgBMI );
+        System.out.printf("The average BMI from the entered data is : %.1f%n", avgBMI );
 
     }
 
