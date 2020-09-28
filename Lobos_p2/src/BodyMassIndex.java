@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class BodyMassIndex {
@@ -53,8 +55,12 @@ public String category;
     }
 
     public double Round(){
+        // Realized I couldn't use math.round since it returned a long, and I wanted to adhere to the assignment guide lines
+        // So instead I used a big decimal to do the rounding, and then returned the double value of it.
+        BigDecimal roundingPlaceholder = new BigDecimal(Double.toString(this.unroundedBMI));
+        roundingPlaceholder = roundingPlaceholder.setScale(1, RoundingMode.HALF_UP);
         double temp = 0;
-        temp = Math.round(this.unroundedBMI*10)/10.0;
+        temp = roundingPlaceholder.doubleValue();
 
         return temp;
     }
