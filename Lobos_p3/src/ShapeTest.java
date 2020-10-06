@@ -40,8 +40,11 @@ public class ShapeTest {
     @Test
     public void testTriangleArea2(){
         Shape2D shape = new Triangle(0.5, 0.25);
-        assertsEquals(0.063, shape.getArea90, 0.001);
+        assertEquals(0.063, shape.getArea(), 0.001);
     }
+
+
+
 
     @Test
     public void testCircleName(){
@@ -136,7 +139,7 @@ public class ShapeTest {
 
     @Test
     public void testSphereArea(){
-        Shape3D shape = new Sphere(0.75);
+        Shape3D shape = new Sphere(10);
         assertEquals(1256.64, shape.getArea(), 0.01);
     }
 
