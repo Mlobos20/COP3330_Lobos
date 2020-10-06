@@ -1,9 +1,8 @@
 public class Circle extends Shape2D {
-    protected String name;
     protected double radius;
 
     Circle(double radius){
-        this.name = "circle";
+        super("circle");
         this.radius = radius;
     }
 

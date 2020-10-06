@@ -1,9 +1,8 @@
 public class Cube extends Shape3D {
-    protected String name;
     protected double sidelen;
 
     Cube(double sidelen){
-        this.name = "cube";
+        super("cube");
         this.sidelen = sidelen;
     }
 

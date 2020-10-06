@@ -1,8 +1,7 @@
 public class Shape3D extends Shape {
-    protected String name;
 
-    Shape3D(){
-        this.name = "Shape3D";
+    Shape3D(String input){
+        super(input);
     }
 
     public String getName(){

@@ -1,8 +1,7 @@
 public class Shape2D extends Shape {
-    protected String name;
 
-    Shape2D(){
-        this.name = "Shape2D";
+    Shape2D(String input){
+        super(input);
     }
 
     public String getName(){

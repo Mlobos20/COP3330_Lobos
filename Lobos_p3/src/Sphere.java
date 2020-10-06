@@ -1,10 +1,9 @@
 public class Sphere extends Shape3D {
-   protected String name;
    protected double radius;
 
 
    Sphere(double radius){
-      this.name = "sphere";
+      super("sphere");
       this.radius = radius;
    }
 

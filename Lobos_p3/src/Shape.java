@@ -1,8 +1,8 @@
 public class Shape {
     protected String name;
 
-    Shape(){
-        this.name = "Shape";
+    Shape(String input){
+        this.name = input;
     }
 
     public String getName(){

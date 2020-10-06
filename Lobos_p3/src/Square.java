@@ -1,9 +1,8 @@
 public class Square extends Shape2D {
-    protected String name;
     protected double size;
 
     Square(double sidelen){
-        this.name = "square";
+        super("square");
         this.size = sidelen;
     }
 

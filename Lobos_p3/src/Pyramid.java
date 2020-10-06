@@ -1,12 +1,11 @@
 public class Pyramid extends Shape3D {
-    protected String name;
     protected double length;
     protected double width;
     protected double height;
 
 
     Pyramid(double length, double width, double height){
-        this.name = "pyramid";
+        super("pyramid");
         this.length = length;
         this.width = width;
         this.height = height;
