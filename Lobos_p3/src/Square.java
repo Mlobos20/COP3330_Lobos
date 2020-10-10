@@ -6,11 +6,12 @@ public class Square extends Shape2D {
         this.size = sidelen;
     }
 
-
+    @Override
     public String getName(){
         return name;
     }
 
+    @Override
     public double getArea(){
         return Math.pow(this.size,2);
     }

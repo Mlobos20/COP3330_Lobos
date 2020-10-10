@@ -11,10 +11,12 @@ public class Pyramid extends Shape3D {
         this.height = height;
     }
 
+    @Override
     public String getName(){
         return this.name;
     }
 
+    @Override
     public double getArea(){
         double ans = 0;
         ans = (length * width) + (length * (Math.sqrt((Math.pow(width/2,2) + (Math.pow(height,2)))))) + (width * (Math.sqrt((Math.pow(length/2,2)) + Math.pow(height,2))));
@@ -22,6 +24,7 @@ public class Pyramid extends Shape3D {
         return ans;
     }
 
+    @Override
     public double getVolume(){
         return (this.length *this.width *this.height)/3;
     }

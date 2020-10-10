@@ -8,10 +8,12 @@ public class Triangle extends Shape2D {
         this.height = height;
     }
 
+    @Override
     public String getName(){
         return name;
     }
 
+    @Override
     public double getArea(){
         return (this.base*this.height)/2;
     }

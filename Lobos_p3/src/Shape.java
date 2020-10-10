@@ -1,16 +1,12 @@
-public class Shape {
+public abstract class Shape {
     protected String name;
 
     Shape(String input){
         this.name = input;
     }
 
-    public String getName(){
-        return this.name;
-    }
+    public abstract String getName();
 
-    public double getArea(){
-        return 0;
-    }
+    public abstract double getArea();
 
 }

@@ -6,14 +6,17 @@ public class Cube extends Shape3D {
         this.sidelen = sidelen;
     }
 
+    @Override
     public String getName(){
         return name;
     }
 
+    @Override
     public double getArea(){
         return (6*(Math.pow(sidelen,2)));
     }
 
+    @Override
     public double getVolume(){
         return Math.pow(sidelen, 3);
     }
