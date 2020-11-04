@@ -1,0 +1,21 @@
+public class App {
+
+    //This class will be the driver class of the application
+
+    //Here is where the user interacts with the various menus
+    // and makes their entries, such as titles and task list items
+
+    // REQUIREMENTS
+
+    // - A USER SHALL BE ABLE TO CREATE A NEW TASK LIST
+    // - A USER SHALL BE ABLE TO LOAD AN EXISTING TASK LIST
+
+    // - A USER SHALL BE ABLE TO VIEW THE CURRENT TASK LIST
+    // - A USER SHALL BE ABLE TO SAVE THE CURRENT TASK LIST
+    // - A USER SHALL BE ABLE TO ADD AN ITEM TO THE CURRENT TASK LIST
+    // - A USER SHALL BE ABLE TO EDIT AN ITEM IN THE CURRENT TASK LIST
+    // - A USER SHALL BE ABLE TO REMOVE AN ITEM FROM THE CURRENT TASK LIST
+    // - A USER SHALL BE ABLE TO MARK AN ITEM IN THE CURRENT TASK LIST AS COMPLETED
+    // - A USER SHALL BE ABLE TO UNMARK AN ITEM IN THE CURRENT TASK LIST AS COMPLETED
+
+}
