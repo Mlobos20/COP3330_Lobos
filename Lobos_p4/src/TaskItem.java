@@ -5,6 +5,7 @@ public class TaskItem {
     private String Title;
     private String Description;
     private LocalDate DueDate;
+    private boolean CompletionStatus;
 
     TaskItem(String Title, String Description, String DueDate){
         // try to set the title, but it expects a string
@@ -28,6 +29,8 @@ public class TaskItem {
             throw new IllegalArgumentException("Please enter the date in the format YYYY-MM-DD");
 //            System.out.println("Please enter the date in the format YYYY-MM-DD");
         }
+
+        this.CompletionStatus = false;
     }
 
     public String getDueDate(){
@@ -36,6 +39,10 @@ public class TaskItem {
 
     public String getTitle(){
         return this.Title;
+    }
+
+    public String getDescription() {
+        return this.Description;
     }
 
     public void setTitle(String NewTitle){
@@ -50,6 +57,11 @@ public class TaskItem {
         }
     }
 
+
+    public void setDescription(String desc){
+        this.Description = desc;
+    }
+
     public void setDueDate(String NewDate){
         try{
             this.DueDate = LocalDate.parse(NewDate);
@@ -57,6 +69,21 @@ public class TaskItem {
             throw new IllegalArgumentException("Please enter the date in the format YYYY-MM-DD");
         }
     }
+
+    public void setCompleted(boolean status){
+        this.CompletionStatus = status;
+    }
+
+    public boolean getCompletionStatus(){
+        return this.CompletionStatus;
+    }
+
+    @Override
+    public String toString(){
+        return (this.Title + ":" + " " + this.Description + "." + " Due: " + this.DueDate);
+    }
+
+
 
 
     //This is the class will house all of the information pertinent to a task

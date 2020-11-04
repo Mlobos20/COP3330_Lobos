@@ -63,13 +63,52 @@ class TaskItemTest {
 
 
     // Task List Tests
-//    addingTaskItemsIncreasesSize()
-//    completingTaskItemChangesStatus()
-//    completingTaskItemFailsWithInvalidIndex()
-//    editingTaskItemChangesValues()
-//    editingTaskItemDescriptionChangesValue()
-//    editingTaskItemDescriptionFailsWithInvalidIndex()
-//    editingTaskItemDueDateChangesValue()
+    @Test
+    public void addingTaskItemsIncreasesSize(){
+        TaskList tskList = new TaskList("List 1");
+        TaskItem tsk = new TaskItem("task 1", "", "2020-11-04");
+        tskList.addItem(tsk);
+        assertEquals(1,tskList.getListSize());
+    }
+    @Test
+    public void completingTaskItemChangesStatus(){
+        TaskList tskList = new TaskList("List 1");
+        TaskItem tsk = new TaskItem("task 1", "", "2020-11-04");
+        tskList.addItem(tsk);
+        tskList.markComplete(0);
+        assertEquals(true, tsk.getCompletionStatus());
+    }
+    @Test
+    public void completingTaskItemFailsWithInvalidIndex(){
+        TaskList tskList = new TaskList("List 1");
+        TaskItem tsk = new TaskItem("task 1", "", "2020-11-04");
+        tskList.addItem(tsk);
+        assertThrows(IndexOutOfBoundsException.class, () -> {tskList.markComplete(2);} );
+    }
+    @Test
+    public void editingTaskItemChangesValues(){
+        TaskItem tsk = new TaskItem("Original Title", "This is a description", "2020-11-04");
+        tsk.setTitle("This is a renewed Title");
+        tsk.setDescription("This is a new description");
+        assertEquals("This is a renewed Title: This is a new description. Due: 2020-11-04", tsk.toString());
+    }
+    @Test
+    public void editingTaskItemDescriptionChangesValue(){
+        TaskItem tsk = new TaskItem("Title", "Original Description", "2020-11-04");
+        tsk.setDescription("This is an edited description");
+        assertEquals("This is an edited description", tsk.getDescription());
+    }
+    @Test
+    public void editingTaskItemDescriptionFailsWithInvalidIndex(){
+        TaskList tskList = new TaskList("Title 1");
+        TaskItem tsk = new TaskItem("A", "", "2020-11-04");
+        tskList.addItem(tsk);
+        assertThrows(IndexOutOfBoundsException.class, () -> {tskList.editItemDesc(2,"New Description");} );
+    }
+    @Test
+    public void editingTaskItemDueDateChangesValue(){
+        
+    }
 //    editingTaskItemDueDateFailsWithInvalidIndex()
 //    editingTaskItemTitleChangesValue()
 //    editingTaskItemTitleFailsWithInvalidIndex()
