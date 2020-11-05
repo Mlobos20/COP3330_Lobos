@@ -7,15 +7,79 @@ private ArrayList<TaskItem> TskList = new ArrayList<TaskItem>();
 
     TaskList(String TaskListName){
         this.TaskListName = TaskListName;
+        this.TaskCount = 0;
+    }
+
+    public void addItem(TaskItem tsk){
+        this.TskList.add(tsk);
+        this.TaskCount++;
+    }
+
+    public void removeItem(int TaskNum){
+        try {
+            if (TaskNum > this.TaskCount || TaskNum < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            this.TskList.remove(TaskNum);
+            this.TaskCount--;
+        }catch(IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Please enter a number between 0 and " + this.TaskCount);
+        }
+    }
+
+    public boolean isListEmpty(){
+        if (this.TaskCount == 0){
+            return true;
+        }else
+            return false;
     }
 
     public int getListSize() {
         return this.TaskCount;
     }
 
-    public void addItem(TaskItem tsk){
-        TskList.add(tsk);
-        this.TaskCount++;
+    public String getItemDescription(int TaskNum){
+        try {
+            if (TaskNum > this.TaskCount || TaskNum < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            return this.TskList.get(TaskNum).getDescription();
+        }catch(IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Please enter a task number between 0 and " + this.TaskCount);
+        }
+    }
+
+    public String getItemDueDate(int TaskNum){
+        try {
+            if (TaskNum > this.TaskCount || TaskNum < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            return this.TskList.get(TaskNum).getDueDate();
+        }catch(IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Please enter a task number between 0 and " + this.TaskCount);
+        }
+    }
+
+    public String getItemTitle(int TaskNum){
+        try {
+            if (TaskNum > this.TaskCount || TaskNum < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            return this.TskList.get(TaskNum).getTitle();
+        }catch(IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Please enter a task number between 0 and " + this.TaskCount);
+        }
+    }
+
+    public boolean getItemStatus(int TaskNum){
+        try {
+            if (TaskNum > this.TaskCount || TaskNum < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            return this.TskList.get(TaskNum).getCompletionStatus();
+        }catch(IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Please enter a task number between 0 and " + this.TaskCount);
+        }
     }
 
     public void editItemDesc(int TaskNum, String newDesc){
@@ -30,6 +94,28 @@ private ArrayList<TaskItem> TskList = new ArrayList<TaskItem>();
 
     }
 
+    public void editItemDueDate(int TaskNum, String newDate){
+        try {
+            if (TaskNum > this.TaskCount || TaskNum < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            this.TskList.get(TaskNum).setDueDate(newDate);
+        }catch(IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Please enter a task number between 0 and " + this.TaskCount);
+        }
+    }
+
+    public void editItemTitle(int TaskNum, String newTitle){
+        try {
+            if (TaskNum > this.TaskCount || TaskNum < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            this.TskList.get(TaskNum).setTitle(newTitle);
+        }catch(IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Please enter a task number between 0 and " + this.TaskCount);
+        }
+    }
+
     public void markComplete(int TaskNum){
         try{
             if(TaskNum > this.TaskCount) {
@@ -39,6 +125,25 @@ private ArrayList<TaskItem> TskList = new ArrayList<TaskItem>();
         }catch(IndexOutOfBoundsException e){
             throw new IndexOutOfBoundsException("Please enter a task number between 0 and " + this.TaskCount);
         }
+    }
+
+    public void markIncomplete(int TaskNum){
+        try{
+            if(TaskNum > this.TaskCount) {
+                throw new IndexOutOfBoundsException();
+            }
+            this.TskList.get(TaskNum).setCompleted(false);
+        }catch(IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Please enter a task number between 0 and " + this.TaskCount);
+        }
+    }
+
+    public void ListToString(){
+        System.out.println(this.TaskListName);
+        for(TaskItem tsk : TskList){
+            System.out.println(tsk.toString());
+        }
+        return;
     }
 
 
