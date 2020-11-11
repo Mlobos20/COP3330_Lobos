@@ -6,7 +6,9 @@ public class TaskItem {
     private String Description;
     private LocalDate DueDate;
     private boolean CompletionStatus;
+    private String completionMarker = "***";
 
+    // constructor for a task item
     TaskItem(String Title, String Description, String DueDate){
         // try to set the title, but it expects a string
         try{
@@ -33,6 +35,7 @@ public class TaskItem {
         this.CompletionStatus = false;
     }
 
+    // various get functions
     public String getDueDate(){
         return this.DueDate.toString();
     }
@@ -45,6 +48,11 @@ public class TaskItem {
         return this.Description;
     }
 
+    public boolean getCompletionStatus(){
+        return this.CompletionStatus;
+    }
+
+    // various set functions
     public void setTitle(String NewTitle){
         try{
             if(NewTitle.length() < 1) {
@@ -56,7 +64,6 @@ public class TaskItem {
             throw new IllegalArgumentException("Title must be 1 or more characters in length");
         }
     }
-
 
     public void setDescription(String desc){
         this.Description = desc;
@@ -74,13 +81,15 @@ public class TaskItem {
         this.CompletionStatus = status;
     }
 
-    public boolean getCompletionStatus(){
-        return this.CompletionStatus;
-    }
-
+    // This was created to be able to output the task item to a file in the correct format
     @Override
     public String toString(){
-        return (this.Title + ":" + " " + this.Description + "." + " Due: " + this.DueDate);
+        if(!getCompletionStatus()) {
+            return (this.Title + ":" + " " + this.Description + " " + " Due: " + this.DueDate);
+        }
+        else{
+            return (this.completionMarker + this.Title + ":" + " " + this.Description + "." + " Due: " + this.DueDate);
+        }
     }
 
 

@@ -89,7 +89,9 @@ class TaskItemTest {
         TaskItem tsk = new TaskItem("Original Title", "This is a description", "2020-11-04");
         tsk.setTitle("This is a renewed Title");
         tsk.setDescription("This is a new description");
-        assertEquals("This is a renewed Title: This is a new description. Due: 2020-11-04", tsk.toString());
+        tsk.setDueDate("2020-11-09");
+        tsk.setCompleted(true);
+        assertEquals("***This is a renewed Title: This is a new description. Due: 2020-11-09", tsk.toString());
     }
     @Test
     public void editingTaskItemDescriptionChangesValue(){

@@ -140,8 +140,8 @@ private ArrayList<TaskItem> TskList = new ArrayList<TaskItem>();
 
     public void ListToString(){
         System.out.println(this.TaskListName);
-        for(TaskItem tsk : TskList){
-            System.out.println(tsk.toString());
+        for(int i = 0; i < this.TaskCount; i++){
+            System.out.printf(i + " : " + this.TskList.get(i).toString() + "%n");
         }
         return;
     }
