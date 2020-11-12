@@ -1,4 +1,3 @@
-import java.security.KeyStore;
 import java.util.Scanner;
 
 public class App {
@@ -29,57 +28,101 @@ public class App {
     public static void listOperationMenuInteraction(TaskList tskList){
         // PrintOperationMenu();
         int userInput = 0;
+        int taskChoice = 0;
         while(userInput != 8) {
+            boolean validInput = false;
             PrintOperationMenu();
             userInput = getMenu2Input();
             switch (userInput) {
                 case 1:
                     // view the list
-                    if(tskList.isListEmpty()) {
+                    if (tskList.isListEmpty()) {
                         System.out.println("List is empty :(");
-                    }
-                    else {
+                    } else {
                         tskList.ListToString();
                     }
                     break;
                 case 2:
                     // add an item
-                    System.out.println("Please enter the name of the task (Must be more than 1 character)");
-                    String taskName = getUserInput();
-                    System.out.println("Please enter a description of the task (Optional)");
-                    String taskDesc = getUserInput();
-                    System.out.println("Please enter a due date in the following format: YYYY-MM-DD");
-                    String taskDueDate = getUserInput();
-                    TaskItem tsk = new TaskItem(taskName, taskDesc, taskDueDate);
-                    tskList.addItem(tsk);
+                    while (!validInput) {
+                        try {
+                            System.out.println("Please enter the name of the task (Must be more than 1 character)");
+                            String taskName = getUserInput();
+                            System.out.println("Please enter a description of the task (Optional)");
+                            String taskDesc = getUserInput();
+                            System.out.println("Please enter a due date in the following format: YYYY-MM-DD");
+                            String taskDueDate = getUserInput();
+                            TaskItem tsk = new TaskItem(taskName, taskDesc, taskDueDate);
+                            tskList.addItem(tsk);
+                            validInput = true;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("");
+                        }
+                    }
                     break;
                 case 3:
                     // edit an item
-                    System.out.println("Please enter the number of the task you would like to edit");
-                    int taskChoice = getTaskNumber();
-                    System.out.println("Please enter the edited Title");
-                    String newTitle = getUserInput();
-                    System.out.println("Please enter the edited Description");
-                    String newDesc = getUserInput();
-                    System.out.println("Please enter the edited Due Date");
-                    String newDueDate = getUserInput();
-
-                    tskList.editItemTitle(taskChoice,newTitle);
-                    tskList.editItemDesc(taskChoice,newDesc);
-                    tskList.editItemDueDate(taskChoice,newDueDate);
-
+                    while (!validInput) {
+                        try {
+                            System.out.println("Please enter the number of the task you would like to edit");
+                            taskChoice = getTaskNumber();
+                            if (tskList.verifyIndex(taskChoice)) {
+                                System.out.println("Please enter the edited Title");
+                                String newTitle = getUserInput();
+                                tskList.editItemTitle(taskChoice, newTitle);
+                                System.out.println("Please enter the edited Description");
+                                String newDesc = getUserInput();
+                                tskList.editItemDesc(taskChoice, newDesc);
+                                System.out.println("Please enter the edited Due Date");
+                                String newDueDate = getUserInput();
+                                tskList.editItemDueDate(taskChoice, newDueDate);
+                                validInput = true;
+                            }
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("Please enter a task number within the available range ");
+                            System.out.println("");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("Make sure your title is 1 or more character, and your date is in the format : YYYY-MM-DD %n");
+                            System.out.println("");
+                        }
+                    }
                     break;
                 case 4:
                     // remove an item
-                    System.out.println("Please enter the task number you would like to remove");
-                    taskChoice = getTaskNumber();
-                    tskList.removeItem(taskChoice);
+                    while(!validInput) {
+                        try {
+                            System.out.println("Please enter the task number you would like to remove");
+                            taskChoice = getTaskNumber();
+                            if (tskList.verifyIndex(taskChoice)) {
+                                tskList.removeItem(taskChoice);
+                                validInput = true;
+                            }
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("Please enter a task number within the available range");
+                            System.out.println("");
+                        }
+                    }
                     break;
                 case 5:
                     // mark an item as completed
-                    System.out.println("Please enter the task number you would like to mark as complete");
-                    taskChoice = getTaskNumber();
-                    tskList.markComplete(taskChoice);
+                    while(!validInput) {
+                        try {
+                            System.out.println("Please enter the task number you would like to mark as complete");
+                            taskChoice = getTaskNumber();
+                            if (tskList.verifyIndex(taskChoice)) {
+                                tskList.markComplete(taskChoice);
+                                validInput = true;
+                            }
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("Please enter a task number within the available range");
+                            System.out.println("");
+                        }
+                    }
                     break;
                 case 6:
                     // unmark an item as incomplete
@@ -106,7 +149,7 @@ public class App {
         Scanner scnr = new Scanner(System.in);
         int choice = 0;
         boolean validInput  = false;
-        while (validInput != true) {
+        while (!validInput) {
             try {
                 choice = scnr.nextInt();
                 if (choice < 1 || choice > 3) {
@@ -124,7 +167,7 @@ public class App {
         Scanner scnr = new Scanner(System.in);
         int choice = 0;
         boolean validInput  = false;
-        while (validInput != true) {
+        while (!validInput) {
             try {
                 choice = scnr.nextInt();
                 if (choice < 1 || choice > 8) {
@@ -140,14 +183,12 @@ public class App {
 
     public static String getUserInput(){
         Scanner scnr = new Scanner(System.in);
-        String input = scnr.nextLine();
-        return input;
+        return scnr.nextLine();
     }
 
     public static int getTaskNumber(){
         Scanner scnr = new Scanner(System.in);
-        int input = scnr.nextInt();
-        return input;
+        return scnr.nextInt();
     }
 
     public static void PrintMainMenu(){

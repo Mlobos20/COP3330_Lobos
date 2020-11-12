@@ -138,6 +138,17 @@ private ArrayList<TaskItem> TskList = new ArrayList<TaskItem>();
         }
     }
 
+    public boolean verifyIndex(int TaskNum){
+        try {
+            if (TaskNum > this.TaskCount || TaskNum < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            return true;
+        } catch (IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Please enter a task between 0 and " + this.TaskCount);
+        }
+    }
+
     public void ListToString(){
         System.out.println(this.TaskListName);
         for(int i = 0; i < this.TaskCount; i++){
