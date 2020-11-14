@@ -24,6 +24,7 @@ public class App {
                     listOperationMenuInteraction(tskList);
                     break;
                 case 2:
+                    tskList = new TaskList();
                     System.out.println("User entered 2");
                     System.out.println("Please enter the filename of the list you would like to open from the current directory");
                     String preExistingListName = getFileName();
