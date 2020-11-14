@@ -1,8 +1,16 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
 
-    public static void main(String[] args) {
+
+    private TaskList tskList;
+
+    public App(){
+        tskList = new TaskList();
+    }
+
+    private void userInteraction(){
         int UserInput = 0;
         while(UserInput != 3) {
             PrintMainMenu();
@@ -11,21 +19,25 @@ public class App {
                 case 1:
                     System.out.println("User entered 1");
                     System.out.println("Please enter the name of the List you would like to create (This will be used as the filename)");
-                    String newListName= getFileName();
-                    TaskList tskList = new TaskList(newListName);
+                    String newListName = getFileName();
+                    tskList.setTitles(newListName);
                     listOperationMenuInteraction(tskList);
                     break;
                 case 2:
                     System.out.println("User entered 2");
                     System.out.println("Please enter the filename of the list you would like to open from the current directory");
                     String preExistingListName = getFileName();
+                    tskList.setTitles(preExistingListName);
+                    tskList.deSerializeFile();
+                    listOperationMenuInteraction(tskList);
                     break;
             }
         }
         System.out.println("User entered 3: now exiting the program");
     }
 
-    public static void listOperationMenuInteraction(TaskList tskList){
+
+    private void listOperationMenuInteraction(TaskList tskList){
         // PrintOperationMenu();
         int userInput = 0;
         int taskChoice = 0;
@@ -81,7 +93,7 @@ public class App {
                             }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Incorrect input, please try again");
-                            System.out.println("Please enter a task number within the available range ");
+                            System.out.println("Please enter a task number within 0 and " + tskList.getListSize());
                             System.out.println("");
                         } catch (IllegalArgumentException e) {
                             System.out.println("Incorrect input, please try again");
@@ -102,7 +114,7 @@ public class App {
                             }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Incorrect input, please try again");
-                            System.out.println("Please enter a task number within the available range");
+                            System.out.println("Please enter a task number within 0 and " + tskList.getListSize());
                             System.out.println("");
                         }
                     }
@@ -119,35 +131,35 @@ public class App {
                             }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Incorrect input, please try again");
-                            System.out.println("Please enter a task number within the available range");
+                            System.out.println("Please enter a task number within 0 and " + tskList.getListSize());
                             System.out.println("");
                         }
                     }
                     break;
                 case 6:
                     // unmark an item as incomplete
-                    System.out.println("Please enter the task number you would like to mark as complete");
+                    System.out.println("Please enter a task number within 0 and " + tskList.getListSize());
                     taskChoice = getTaskNumber();
                     tskList.markIncomplete(taskChoice);
                     break;
                 case 7:
                     // save the current list
+                    tskList.serializeToFile();
                     break;
             }
         }
         System.out.println("returning to the main menu");
     }
 
-    public static String getFileName(){
+    private String getFileName(){
         Scanner scnr = new Scanner(System.in);
-        String fileName;
-        fileName = scnr.nextLine();
-        return fileName;
+        String input = scnr.nextLine();
+        return input;
     }
 
-    public static int getMenu1Input(){
-        Scanner scnr = new Scanner(System.in);
+    private int getMenu1Input(){
         int choice = 0;
+        Scanner scnr = new Scanner(System.in);
         boolean validInput  = false;
         while (!validInput) {
             try {
@@ -158,12 +170,15 @@ public class App {
                 validInput = true;
             } catch (IllegalArgumentException e){
                 System.out.println("Please enter an integer between 1 and 3");
+            } catch (InputMismatchException e){
+                System.out.println("Please enter an integer between 1 and 3");
+                scnr.nextLine();
             }
         }
         return choice;
     }
 
-    public static int getMenu2Input(){
+    private int getMenu2Input(){
         Scanner scnr = new Scanner(System.in);
         int choice = 0;
         boolean validInput  = false;
@@ -176,22 +191,27 @@ public class App {
                 validInput = true;
             } catch (IllegalArgumentException e){
                 System.out.println("Please enter an integer between 1 and 8");
+            } catch (InputMismatchException e){
+                System.out.println("Please enter an integer between 1 and 8");
+                scnr.nextLine();
             }
         }
         return choice;
     }
 
-    public static String getUserInput(){
+    private String getUserInput(){
         Scanner scnr = new Scanner(System.in);
-        return scnr.nextLine();
+        String input = scnr.nextLine();
+        return input;
     }
 
-    public static int getTaskNumber(){
+    private int getTaskNumber(){
         Scanner scnr = new Scanner(System.in);
-        return scnr.nextInt();
+        int input = scnr.nextInt();
+        return input;
     }
 
-    public static void PrintMainMenu(){
+    private static void PrintMainMenu(){
         System.out.println("Menu");
         System.out.println("------------------------");
         System.out.println("1) create a new list");
@@ -199,7 +219,7 @@ public class App {
         System.out.println("3) quit");
     }
 
-    public static void PrintOperationMenu(){
+    private static void PrintOperationMenu(){
         System.out.println("List Operation Menu");
         System.out.println("--------------------");
         System.out.println("1) view the list");
@@ -211,6 +231,13 @@ public class App {
         System.out.println("7) save the current list");
         System.out.println("8) quit to the main menu");
     }
+
+    public static void main(String[] args) {
+        App m = new App();
+
+        m.userInteraction();
+    }
+
 
     //This class will be the driver class of the application
 

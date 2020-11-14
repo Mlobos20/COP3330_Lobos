@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class TaskItem {
+public class TaskItem implements Serializable {
     private String Title;
     private String Description;
     private LocalDate DueDate;
