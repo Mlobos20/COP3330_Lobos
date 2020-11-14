@@ -185,6 +185,7 @@ ArrayList<TaskItem> TskList;
             // System.out.println("Deserialized data? temporary print: \n" + input.readObject().toString());
             ArrayList<TaskItem> deSerializedList = (ArrayList<TaskItem>) input.readObject();
             setTskList(deSerializedList);
+            System.out.println("Load Successful... operations now available to perform on loaded list");
             // ListToString();
             input.close();
             inFromFile.close();
