@@ -1,8 +1,5 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class TaskList implements Serializable {
 private String TaskListName;
@@ -178,7 +175,7 @@ ArrayList<TaskItem> TskList;
         }
     }
 
-    public void deSerializeFile(){
+    public void deSerializeFile() throws FileNotFoundException {
         try{
             FileInputStream inFromFile = new FileInputStream(this.fileName);
             ObjectInputStream input = new ObjectInputStream(inFromFile);
@@ -190,7 +187,8 @@ ArrayList<TaskItem> TskList;
             input.close();
             inFromFile.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Error locating file");
+            // System.out.println("The file could not be found with the given file name...");
+            throw new FileNotFoundException();
         } catch (IOException e){
             //System.out.println("IO exception");
             //e.printStackTrace();
@@ -202,7 +200,7 @@ ArrayList<TaskItem> TskList;
     public void ListToString(){
         System.out.println(this.TaskListName);
         for(int i = 0; i < this.TskList.size(); i++){
-            System.out.printf(i + " : " + this.TskList.get(i).toString() + "%n");
+            System.out.printf("Task #:" + i + " : " + this.TskList.get(i).toString() + "%n");
         }
         return;
     }

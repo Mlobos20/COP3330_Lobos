@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -24,13 +25,27 @@ public class App {
                     listOperationMenuInteraction(tskList);
                     break;
                 case 2:
-                    tskList = new TaskList();
-                    System.out.println("User entered 2");
-                    System.out.println("Please enter the filename of the list you would like to open from the current directory");
-                    String preExistingListName = getFileName();
-                    tskList.setTitles(preExistingListName);
-                    tskList.deSerializeFile();
-                    listOperationMenuInteraction(tskList);
+                    boolean success = false;
+                    while (!success) {
+                        try {
+                            tskList = new TaskList();
+                            System.out.println("User entered 2");
+                            System.out.println("Please enter the filename of the list you would like to open from the current directory (Type 'Cancel' to cancel)");
+                            String preExistingListName = getFileName();
+                            if (preExistingListName.equalsIgnoreCase("Cancel")){
+                                System.out.println("User issued cancel, returning to main menu...");
+                                break;
+                            }
+                            tskList.setTitles(preExistingListName);
+                            tskList.deSerializeFile();
+                            success = true;
+                            listOperationMenuInteraction(tskList);
+                        } catch (FileNotFoundException e) {
+                            System.out.println("Error locating the file with given file name");
+                            System.out.println("Please enter the file name again...");
+                            System.out.println();
+                        }
+                    }
                     break;
             }
         }
@@ -70,7 +85,7 @@ public class App {
                             validInput = true;
                         } catch (IllegalArgumentException e) {
                             System.out.println("Incorrect input, please try again");
-                            System.out.println("");
+                            System.out.println();
                         }
                     }
                     break;
@@ -94,12 +109,15 @@ public class App {
                             }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Incorrect input, please try again");
-                            System.out.println("Please enter a task number within 0 and " + tskList.getListSize());
-                            System.out.println("");
+                            System.out.println("Please enter a task number between 0 and " + (tskList.getListSize()-1));
+                            System.out.println();
                         } catch (IllegalArgumentException e) {
                             System.out.println("Incorrect input, please try again");
                             System.out.println("Make sure your title is 1 or more character, and your date is in the format : YYYY-MM-DD %n");
-                            System.out.println("");
+                            System.out.println();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("Please enter a task number between 0 and " + (tskList.getListSize()-1));
                         }
                     }
                     break;
@@ -115,8 +133,12 @@ public class App {
                             }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Incorrect input, please try again");
-                            System.out.println("Please enter a task number within 0 and " + tskList.getListSize());
-                            System.out.println("");
+                            System.out.println("Please enter a task number between 0 and " + (tskList.getListSize()-1));
+                            System.out.println();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("Please enter a task number between 0 and " + (tskList.getListSize()-1));
+                            System.out.println();
                         }
                     }
                     break;
@@ -132,16 +154,35 @@ public class App {
                             }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Incorrect input, please try again");
-                            System.out.println("Please enter a task number within 0 and " + tskList.getListSize());
-                            System.out.println("");
+                            System.out.println("Please enter a task number between 0 and " + (tskList.getListSize()-1));
+                            System.out.println();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("Please enter a task number between 0 and " + (tskList.getListSize()-1));
+                            System.out.println();
                         }
                     }
                     break;
                 case 6:
                     // unmark an item as incomplete
-                    System.out.println("Please enter a task number within 0 and " + tskList.getListSize());
-                    taskChoice = getTaskNumber();
-                    tskList.markIncomplete(taskChoice);
+                    while(!validInput) {
+                        try {
+                            System.out.println("Please enter a task number between 0 and " + (tskList.getListSize() - 1));
+                            taskChoice = getTaskNumber();
+                            if(tskList.verifyIndex(taskChoice)) {
+                                tskList.markIncomplete(taskChoice);
+                                validInput = true;
+                            }
+                        } catch (IndexOutOfBoundsException e){
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("Please enter a task number between 0 and " + (tskList.getListSize()-1));
+                            System.out.println();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Incorrect input, please try again");
+                            System.out.println("Please enter a task number between 0 and " + (tskList.getListSize()-1));
+                            System.out.println();
+                        }
+                    }
                     break;
                 case 7:
                     // save the current list
@@ -154,7 +195,19 @@ public class App {
 
     private String getFileName(){
         Scanner scnr = new Scanner(System.in);
-        String input = scnr.nextLine();
+        String input = null;
+        boolean validInput = false;
+        while (!validInput){
+            try{
+                input = scnr.nextLine();
+                if(input.length() < 1){
+                    throw new IllegalArgumentException();
+                }
+                validInput = true;
+            } catch (IllegalArgumentException e){
+                System.out.println("The filename cannot be empty, it must be 1 or more characters...");
+            }
+        }
         return input;
     }
 
@@ -202,14 +255,12 @@ public class App {
 
     private String getUserInput(){
         Scanner scnr = new Scanner(System.in);
-        String input = scnr.nextLine();
-        return input;
+        return scnr.nextLine();
     }
 
     private int getTaskNumber(){
         Scanner scnr = new Scanner(System.in);
-        int input = scnr.nextInt();
-        return input;
+        return scnr.nextInt();
     }
 
     private static void PrintMainMenu(){

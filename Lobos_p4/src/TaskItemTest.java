@@ -1,11 +1,7 @@
 import org.junit.jupiter.api.Test;
-
-import java.sql.SQLOutput;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.zip.DataFormatException;
-
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class TaskItemTest {
 
