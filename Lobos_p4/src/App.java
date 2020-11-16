@@ -19,7 +19,7 @@ public class App {
             switch (UserInput) {
                 case 1:
                     System.out.println("User entered 1");
-                    System.out.println("Please enter the name of the List you would like to create (This will be used as the filename)");
+                    System.out.println("Please enter the name of the List (DO NOT INCLUDE THE EXTENSION) you would like to create (This will be used as the filename)");
                     String newListName = getFileName();
                     tskList.setTitles(newListName);
                     listOperationMenuInteraction(tskList);
@@ -30,7 +30,7 @@ public class App {
                         try {
                             tskList = new TaskList();
                             System.out.println("User entered 2");
-                            System.out.println("Please enter the filename of the list you would like to open from the current directory (Type 'Cancel' to cancel)");
+                            System.out.println("Please enter the filename (DO NOT INCLUDE THE EXTENSION) of the list you would like to open from the current directory (Type 'Cancel' to cancel)");
                             String preExistingListName = getFileName();
                             if (preExistingListName.equalsIgnoreCase("Cancel")){
                                 System.out.println("User issued cancel, returning to main menu...");
@@ -56,7 +56,7 @@ public class App {
     private void listOperationMenuInteraction(TaskList tskList){
         // PrintOperationMenu();
         int userInput = 0;
-        int taskChoice = 0;
+        int taskChoice;
         while(userInput != 8) {
             boolean validInput = false;
             PrintOperationMenu();
@@ -289,24 +289,5 @@ public class App {
 
         m.userInteraction();
     }
-
-
-    //This class will be the driver class of the application
-
-    //Here is where the user interacts with the various menus
-    // and makes their entries, such as titles and task list items
-
-    // REQUIREMENTS
-
-    // - A USER SHALL BE ABLE TO CREATE A NEW TASK LIST
-    // - A USER SHALL BE ABLE TO LOAD AN EXISTING TASK LIST
-
-    // - A USER SHALL BE ABLE TO VIEW THE CURRENT TASK LIST
-    // - A USER SHALL BE ABLE TO SAVE THE CURRENT TASK LIST
-    // - A USER SHALL BE ABLE TO ADD AN ITEM TO THE CURRENT TASK LIST
-    // - A USER SHALL BE ABLE TO EDIT AN ITEM IN THE CURRENT TASK LIST
-    // - A USER SHALL BE ABLE TO REMOVE AN ITEM FROM THE CURRENT TASK LIST
-    // - A USER SHALL BE ABLE TO MARK AN ITEM IN THE CURRENT TASK LIST AS COMPLETED
-    // - A USER SHALL BE ABLE TO UNMARK AN ITEM IN THE CURRENT TASK LIST AS COMPLETED
 
 }

@@ -93,21 +93,4 @@ public class TaskItem implements Serializable {
         }
     }
 
-
-
-
-    //This is the class will house all of the information pertinent to a task
-    // this includes the tasks name, due date, and description
-    // This also needs to contain a way to flag if an item is marked
-    // as well as if an item has been completed.
-
-    //REQUIREMENTS
-
-    // - A TASK ITEM SHALL CONTAIN A TITLE
-    //      - A title shall be 1 or more characters in length
-    // - A TASK ITEM SHALL CONTAIN A DESCRIPTION
-    //      - A description shall be 0 or more characters in length
-    // - A TASK ITEM SHALL CONTAIN A DUE DATE
-    //      - A due date shall be in the format YYYY-MM-DD
-
 }
