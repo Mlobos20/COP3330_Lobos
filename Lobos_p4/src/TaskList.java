@@ -152,7 +152,7 @@ ArrayList<TaskItem> TskList;
         }
     }
 
-    public void setTskList(ArrayList<TaskItem> newList){
+    private void setTskList(ArrayList<TaskItem> newList){
         for (TaskItem itm : newList){
             // System.out.println("Adding an item to the list");
             this.TskList.add(itm);

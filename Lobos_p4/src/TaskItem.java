@@ -10,7 +10,7 @@ public class TaskItem implements Serializable {
     private String completionMarker = "***";
 
     // constructor for a task item
-    TaskItem(String Title, String Description, String DueDate){
+    public TaskItem(String Title, String Description, String DueDate){
         // try to set the title, but it expects a string
         try{
             if(Title.length() < 1) {

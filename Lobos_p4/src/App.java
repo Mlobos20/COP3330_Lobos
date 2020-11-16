@@ -4,19 +4,20 @@ import java.util.Scanner;
 
 public class App {
 
-
     private TaskList tskList;
-
+    // creates instance where everything takes place
     public App(){
         tskList = new TaskList();
     }
 
     private void userInteraction(){
         int UserInput = 0;
+        // loop that waits for good input, if non-valid input is received, it prompts the user again
         while(UserInput != 3) {
             PrintMainMenu();
             UserInput = getMenu1Input();
             switch (UserInput) {
+                // User wants to make new list, so we prompt for name and make the list
                 case 1:
                     System.out.println("User entered 1");
                     System.out.println("Please enter the name of the List (DO NOT INCLUDE THE EXTENSION) you would like to create (This will be used as the filename)");
@@ -25,6 +26,7 @@ public class App {
                     listOperationMenuInteraction(tskList);
                     break;
                 case 2:
+                    // User wants to load a list, so we prompt for the list and try to deserialize the list from directory
                     boolean success = false;
                     while (!success) {
                         try {
@@ -49,14 +51,15 @@ public class App {
                     break;
             }
         }
+        // If we made it here that means the user wanted to exit the program
         System.out.println("User entered 3: now exiting the program");
     }
 
 
     private void listOperationMenuInteraction(TaskList tskList){
-        // PrintOperationMenu();
         int userInput = 0;
         int taskChoice;
+        // another loop waiting for valid input
         while(userInput != 8) {
             boolean validInput = false;
             PrintOperationMenu();
@@ -190,9 +193,11 @@ public class App {
                     break;
             }
         }
+        // If we're here, user decided to return to main menu
         System.out.println("returning to the main menu");
     }
 
+    // various input functions depending on context
     private String getFileName(){
         Scanner scnr = new Scanner(System.in);
         String input = null;
@@ -263,6 +268,7 @@ public class App {
         return scnr.nextInt();
     }
 
+    // dedicated function to print main menu options
     private static void PrintMainMenu(){
         System.out.println("Menu");
         System.out.println("------------------------");
@@ -271,6 +277,7 @@ public class App {
         System.out.println("3) quit");
     }
 
+    // dedicated function to print list options
     private static void PrintOperationMenu(){
         System.out.println("List Operation Menu");
         System.out.println("--------------------");
