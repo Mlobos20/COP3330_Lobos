@@ -86,10 +86,11 @@ public class TaskItem implements Serializable {
     @Override
     public String toString(){
         if(!getCompletionStatus()) {
-            return (this.Title + ":" + " " + this.Description + " " + " Due: " + this.DueDate);
+            return ("[" + this.DueDate + "]" + " " + this.Title + "." + " Description: " + this.Description);
         }
         else{
-            return (this.completionMarker + this.Title + ":" + " " + this.Description + "." + " Due: " + this.DueDate);
+//            return (this.completionMarker + this.Title + ":" + " " + this.Description + "." + " Due: " + this.DueDate);
+            return (this.completionMarker + "[" + this.DueDate + "]" + " " + this.Title + "." + " Description: " + this.Description);
         }
     }
 
