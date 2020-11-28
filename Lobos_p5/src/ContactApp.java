@@ -107,6 +107,7 @@ public class ContactApp {
                             taskChoice = getTaskNumber();
                             if (cntList.verifyIndex(taskChoice)){
                                 System.out.println("Please provide a value for AT LEAST one of the following fields");
+                                scnr.nextLine();
                                 System.out.println("Please enter the contacts First Name");
                                 String fName = getUserInput();
                                 System.out.println("Please enter the contacts Last Name");

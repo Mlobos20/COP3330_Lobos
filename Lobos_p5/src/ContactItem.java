@@ -63,7 +63,7 @@ public class ContactItem implements Serializable {
 
     @Override
     public String toString(){
-        return(this.firstName + " " + this.lastName + "%n" + "Phone Number: " + this.phoneNumber + "%n" + "Email Address: " + this.emailAddress);
+        return(this.firstName + " " + this.lastName + "%n" + "Phone Number: " + this.phoneNumber + "%n" + "Email Address: " + this.emailAddress + "%n");
     }
 
 }

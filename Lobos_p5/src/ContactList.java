@@ -148,7 +148,7 @@ ArrayList<ContactItem> CntctList;
     public void ListToString(){
         for (int i = 0; i < this.CntctList.size(); i++){
             System.out.printf("Contact #%d%n", i);
-            System.out.println(this.CntctList.get(i).toString());
+            System.out.printf(this.CntctList.get(i).toString());
         }
         return;
     }
