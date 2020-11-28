@@ -292,11 +292,10 @@ public class TaskApp {
             System.out.println("8) quit to the main menu");
         }
 
-        public static void main(String[] args) {
+        public void start() {
 
-            TaskApp m = new TaskApp();
+            userInteraction();
 
-            m.userInteraction();
         }
 
 }
