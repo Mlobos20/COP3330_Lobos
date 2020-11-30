@@ -20,6 +20,7 @@ public class TaskApp {
                 switch (UserInput) {
                     // User wants to make new list, so we prompt for name and make the list
                     case 1:
+                        tskList = new TaskList();
                         System.out.println("User entered 1");
                         System.out.println("Please enter the name of the List (DO NOT INCLUDE THE EXTENSION) you would like to create (This will be used as the filename)");
                         String newListName = getFileName();

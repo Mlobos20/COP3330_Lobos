@@ -21,6 +21,7 @@ public class ContactApp {
             switch (UserInput) {
                 // User wants to make new list, so we prompt for name and make the list
                 case 1:
+                    cntList = new ContactList();
                     System.out.println("User entered 1");
                     System.out.println("Please enter the name of the List (DO NOT INCLUDE THE EXTENSION) you would like to create (This will be used as the filename)");
                     String newListName = getUserInput();
@@ -116,13 +117,8 @@ public class ContactApp {
                                 String pNum = getUserInput();
                                 System.out.println("Please enter the contacts Email Address");
                                 String eAdd = getUserInput();
-                                cntList.editContactFirstName(taskChoice, fName);
-                                cntList.editContactLastName(taskChoice, lName);
-                                cntList.editContactPhoneNumber(taskChoice, pNum);
-                                cntList.editContactEmailAddress(taskChoice,eAdd);
-                                if(cntList.isValidContact(taskChoice)){
-                                   throw new IllegalArgumentException();
-                                }
+                                cntList.editContact(taskChoice,fName,lName,pNum,eAdd);
+                                cntList.isValidContact(taskChoice);
                                 validInput = true;
                             }
                         } catch (IndexOutOfBoundsException e){

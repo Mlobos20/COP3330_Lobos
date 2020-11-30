@@ -18,7 +18,7 @@ public class ContactItem implements Serializable {
 
     public void checkEmpty(){
         if(this.firstName.length() == 0 && this.lastName.length()== 0 && this.phoneNumber.length() == 0 && this.emailAddress.length() == 0){
-            this.isEmpty = true;
+            throw new IllegalArgumentException();
         }
         else{
             this.isEmpty = false;
@@ -27,6 +27,15 @@ public class ContactItem implements Serializable {
 
     public boolean returnEmptyStatus(){
         return this.isEmpty;
+    }
+
+    public void editContact(String fName, String lName, String pNum, String eAdd){
+        this.firstName = fName;
+        this.lastName = lName;
+        this.phoneNumber = pNum;
+        this.emailAddress = eAdd;
+
+        this.checkEmpty();
     }
 
     public String getFirstName() {
@@ -63,7 +72,7 @@ public class ContactItem implements Serializable {
 
     @Override
     public String toString(){
-        return(this.firstName + " " + this.lastName + "%n" + "Phone Number: " + this.phoneNumber + "%n" + "Email Address: " + this.emailAddress + "%n");
+        return(this.firstName + " " + this.lastName + "\n" + "Phone Number: " + this.phoneNumber + "\n" + "Email Address: " + this.emailAddress + "\n");
     }
 
 }

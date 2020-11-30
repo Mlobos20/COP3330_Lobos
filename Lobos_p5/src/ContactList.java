@@ -29,45 +29,12 @@ ArrayList<ContactItem> CntctList;
         }
     }
 
-    public void editContactFirstName(int Tasknum, String fName){
-        try{
-            if(Tasknum < 0 || Tasknum > this.CntctList.size()){
+    public void editContact(int Tasknum, String fName, String lName, String pNum, String eAdd){
+        try {
+            if (Tasknum < 0 || Tasknum > this.CntctList.size()) {
                 throw new IndexOutOfBoundsException();
             }
-            this.CntctList.get(Tasknum).setFirstName(fName);
-        } catch (IndexOutOfBoundsException e){
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    public void editContactLastName(int Tasknum, String lName){
-        try{
-            if(Tasknum < 0 || Tasknum > this.CntctList.size()){
-                throw new IndexOutOfBoundsException();
-            }
-            this.CntctList.get(Tasknum).setLastName(lName);
-        } catch (IndexOutOfBoundsException e){
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    public void editContactPhoneNumber(int Tasknum, String pNum){
-        try{
-            if(Tasknum < 0 || Tasknum > this.CntctList.size()){
-                throw new IndexOutOfBoundsException();
-            }
-            this.CntctList.get(Tasknum).setPhoneNumber(pNum);
-        } catch (IndexOutOfBoundsException e){
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    public void editContactEmailAddress(int Tasknum, String eAdd){
-        try{
-            if(Tasknum < 0 || Tasknum > this.CntctList.size()){
-                throw new IndexOutOfBoundsException();
-            }
-            this.CntctList.get(Tasknum).setEmailAddress(eAdd);
+            this.CntctList.get(Tasknum).editContact(fName, lName, pNum, eAdd);
         } catch (IndexOutOfBoundsException e){
             throw new IndexOutOfBoundsException();
         }
@@ -139,7 +106,7 @@ ArrayList<ContactItem> CntctList;
             throw new FileNotFoundException();
         } catch (IOException e){
             //System.out.println("IO exception");
-            //e.printStackTrace();
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
