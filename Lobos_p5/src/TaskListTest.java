@@ -153,8 +153,9 @@ class TaskListTest {
     }
     @Test
     public void savedTaskListCanBeLoaded(){
-
-        //assertTrue();
+        TaskList tkList = new TaskList();
+        tkList.setTitles("bananas");
+        assertDoesNotThrow(()->{tkList.deSerializeFile();});
     }
     @Test
     public void uncompletingTaskItemChangesStatus(){

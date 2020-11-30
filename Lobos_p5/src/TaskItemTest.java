@@ -56,6 +56,56 @@ class TaskItemTest {
         assertEquals("New Title", tsk.getTitle());
     }
 
-
+    @Test
+    public void constructorFailsWithInvalidDueDate(){
+        assertThrows(IllegalArgumentException.class, ()->{TaskItem tsk = new TaskItem("og title", "", "11-30-2020");});
+    }
+    @Test
+    public void constructorFailsWithInvalidTitle(){
+        assertThrows(IllegalArgumentException.class, ()->{TaskItem tsk = new TaskItem("", "description", "2020-11-30");});
+    }
+    @Test
+    public void constructorSucceedsWithValidDueDate(){
+        TaskItem itm  = new TaskItem("title", "description", "2020-11-30");
+        assertEquals("2020-11-30", itm.getDueDate());
+    }
+    @Test
+    public void constructorSucceedsWithValidTitle(){
+        TaskItem itm  = new TaskItem("title", "description", "2020-11-30");
+        assertEquals("title", itm.getTitle());
+    }
+    @Test
+    public void editingDescriptionSucceedsWithExpectedValue(){
+        TaskItem itm  = new TaskItem("title", "description", "2020-11-30");
+        itm.setDescription("new description");
+        assertEquals("new description", itm.getDescription());
+    }
+    @Test
+    public void editingDueDateFailsWithInvalidDateFormat(){
+        TaskItem itm  = new TaskItem("title", "description", "2020-11-30");
+        assertThrows(IllegalArgumentException.class, ()->{itm.setDueDate("30-2020-11");});
+    }
+    @Test
+    public void editingDueDateFailsWithInvalidYYYMMDD(){
+        TaskItem itm = new TaskItem("title", "description", "2020-11-30");
+        assertThrows(IllegalArgumentException.class, ()->{itm.setDueDate("2020-15-30");});
+    }
+    @Test
+    public void editingDueDateSucceedsWithExpectedValue(){
+        TaskItem itm = new TaskItem("title", "description", "2020-11-30");
+        itm.setDueDate("2020-12-01");
+        assertEquals("2020-12-01", itm.getDueDate());
+    }
+    @Test
+    public void editingTitleFailsWithEmptyString(){
+        TaskItem itm = new TaskItem("title", "description", "2020-11-30");
+        assertThrows(IllegalArgumentException.class, ()->{itm.setTitle("");});
+    }
+    @Test
+    public void editingTitleSucceedsWithExpectedValue(){
+        TaskItem itm = new TaskItem("title", "description", "2020-11-30");
+        itm.setTitle("new title");
+        assertEquals("new title", itm.getTitle());
+    }
 
 }
