@@ -7,9 +7,9 @@ public class TaskApp {
 
         private TaskList tskList;
         // creates instance where everything takes place
-        public TaskApp(){
-            tskList = new TaskList();
-        }
+//        public TaskApp(){
+//            tskList = new TaskList();
+//        }
 
         private void userInteraction(){
             int UserInput = 0;

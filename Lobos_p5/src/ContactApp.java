@@ -8,9 +8,9 @@ public class ContactApp {
 
     private ContactList cntList;
 
-    public ContactApp (){
-        cntList = new ContactList();
-    }
+//    public ContactApp (){
+//        cntList = new ContactList();
+//    }
 
     private void userInteraction(){
         int UserInput = 0;
